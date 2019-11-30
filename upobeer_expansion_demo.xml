@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data noupdate="1">
+		<record id="cliente_1" model="upobeer.cliente">
+			<field name="name">Juan</field>
+			<field name="apellidos">Tuzri</field>
+			<field name="dni">20060971A</field>
+			<field name="fecha_nac">20/06/1998</field>
+			<field name="direccion">Mi casa, Nº22</field>
+			<field name="cp">41500</field>
+			<field name="tlf">672728588</field>
+			<field name="email">1mbisgg@gmail.com</field>
+			<field name="desde">25/11/2019</field>
+		</record>
+		<record id="cliente_2" model="upobeer.cliente">
+			<field name="name">Helena</field>
+			<field name="apellidos">Nito</field>
+			<field name="dni">20060972P</field>
+			<field name="fecha_nac">11/02/1998</field>
+			<field name="direccion">Su casa, Nº31</field>
+			<field name="cp">41500</field>
+			<field name="tlf">672727477</field>
+			<field name="email">helenanito@gmail.com</field>
+			<field name="desde">28/11/2019</field>
+		</record>
+		<record id="cliente_3" model="upobeer.cliente">
+			<field name="name">Aitor</field>
+			<field name="apellidos">Menta</field>
+			<field name="dni">20060973H</field>
+			<field name="fecha_nac">18/10/1970</field>
+			<field name="direccion">Sin casa, Nº44</field>
+			<field name="cp">41500</field>
+			<field name="tlf">672727477</field>
+			<field name="desde">30/11/2019</field>
+		</record>
+		<record id="cerveza_1" model="upobeer.cerveza">
+			<field name="name">Cruzcampo</field>
+			<field name="idcerveza">1</field>
+			<field name="alcohol">True</field>
+			<field name="envasado">15/09/2019</field>
+			<field name="maduracion">0</field>
+			<field name="precio">0.56</field>
+		</record>
+		<record id="cerveza_2" model="upobeer.cerveza">
+			<field name="name">Alhambra Reserva 1925</field>
+			<field name="idcerveza">2</field>
+			<field name="alcohol">True</field>
+			<field name="envasado">04/03/2017</field>
+			<field name="maduracion">2</field>
+			<field name="precio">1.93</field>
+		</record>
+		<record id="cerveza_3" model="upobeer.cerveza">
+			<field name="name">Estrella Galicia 0,0</field>
+			<field name="idcerveza">3</field>
+			<field name="alcohol">False</field>
+			<field name="envasado">25/10/2019</field>
+			<field name="maduracion">0</field>
+			<field name="precio">0.64</field>
+		</record>
+		<record id="pedido_1" model="upobeer.pedido">
+			<field name="name">1</field>
+			<field name="cantidad">4</field>
+			<field name="estado">terminado</field>
+			<field name="inicio">01/12/2019</field>
+			<field name="fin">06/12/2019</field>
+			<field name="descripcion">Primer pedido</field>
+			<field name="cerveza_id" ref="cerveza_1"></field>
+			<field name="cliente_id" ref="cliente_1"></field>
+		</record>
+		<record id="pedido_2" model="upobeer.pedido">
+			<field name="name">2</field>
+			<field name="cantidad">25</field>
+			<field name="estado">enviado</field>
+			<field name="inicio">30/11/2019</field>
+			<field name="fin">05/12/2019</field>
+			<field name="descripcion">Primer pedido</field>
+			<field name="cerveza_id" ref="cerveza_2"></field>
+			<field name="cliente_id" ref="cliente_3"></field>
+		</record>
+	</data>
+</odoo>
+		
