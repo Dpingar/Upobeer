@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+		<record model="ir.ui.view" id="upobeer_cliente_form">
+			<field name="name">Clientes</field>
+			<field name="model">upobeer.cliente</field>
+			<field name="arch" type="xml">
+				<form string="Form of clientes">
+					<group string="Cliente">
+						<field name="id" />
+						<field name="name" />
+						<field name="apellidos" />
+						</group>
+						<group>
+							<field name="foto" nolabel="1" widget="image"
+								class="oe_avatar" />
+						</group>
+					<notebook>
+						<page string="Datos personales">
+							<group>
+								<group>
+									<field name="dni" />
+									<field name="fecha_nac" />
+									<field name="tlf" />
+									<field name="direccion" />
+									<field name="cp" />
+									<field name="email" />
+									<field name="desde" />
+								</group>
+								<group>
+									<p>
+									Para ponerse en contacto con un cliente primero lo haremos por telefono y en caso de no responde si tuviera
+									email usariamos este como segunda opción. Si no tiene email se esperaran 8h para realizar la siguiente llamada
+									horario de llamadas: 08:00 a 20:00
+									</p>
+								</group>
+							</group>
+						</page>
+						<page string="Lista de pedidos">
+							<group>
+								<field name="pedido_ids">
+									<tree>
+										<field name="name" />
+										<field name="estado" />
+										<field name="precioT" />
+									</tree>
+								</field>
+							</group>
+						</page>
+					</notebook>
+				</form>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="upobeer_cliente_tree">
+			<field name="name">Clientes</field>
+			<field name="model">upobeer.cliente</field>
+			<field name="arch" type="xml">
+				<tree string="Tree of clientes">
+					<field name="id" />
+					<field name="name" />
+					<field name="apellidos" />
+					<field name="dni" />
+					<field name="fecha_nac" />
+					<field name="tlf" />
+					<field name="direccion" />
+					<field name="cp" />
+					<field name="email" />
+					<field name="desde" />
+					<field name="pedido_ids" />
+				</tree>
+			</field>
+		</record>
+		<record model="ir.ui.view" id="view_upobeer_cliente_search">
+			<field name="name">view_upobeer_cliente_search</field>
+			<field name="model">upobeer.cliente</field>
+			<field name="type">search</field>
+			<field name="arch" type="xml">
+				<search string="Clientes">
+					<group expand="0" string="Agrupar por…">
+						<filter name="group_by_cp" string="Codigo postal"
+							context="{'group_by':'cp'}" />
+					</group>
+				</search>
+			</field>
+		</record>
+		<record id="act_cliente" model="ir.actions.act_window">
+			<field name="name">Clientes</field>
+			<field name="res_model">upobeer.cliente</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+		<menuitem id="upobeer" name="UpoBeer" action="act_cliente" />
+		<menuitem name="Clientes" id="clientes_submenu"
+			parent="upobeer" sequence="100" />
+		<menuitem name="Ver clientes" id="clientes_submenu_2"
+			parent="clientes_submenu" sequence="100" action="act_cliente" />
+	</data>
+</odoo> 

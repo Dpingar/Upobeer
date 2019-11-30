@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+
+		<record model="ir.ui.view" id="upobeer_cerveza_tree_view">
+			<field name="name">view_upobeer_cerveza_tree</field>
+			<field name="model">upobeer.cerveza</field>
+			<field name="arch" type="xml">
+				<tree string="tree_string">
+					<field name="idcerveza" />
+					<field name="name" />
+					<field name="foto" />
+					<field name="alcohol" />
+					<field name="maduracion" />
+					<field name="envasado" />
+					<field name="precio" />
+					<field name="pedido_ids" />
+				</tree>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="view_upobeer_cerveza_form">
+			<field name="name">view_upobeer_cerveza_form</field>
+			<field name="model">upobeer.cerveza</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="Cervezas">
+					<group string="Cervezas">
+						<field name="foto" widget="image" class="oe_avatar" />
+						<field name="idcerveza" />
+						<field name="name" />
+						<field name="envasado" />
+						<field name="maduracion" />
+						<field name="precio" />
+						<field name="alcohol" />
+					</group>
+						<notebook>
+						<!--<page string="Lista de ingredientes">
+							<group>
+								<field name="ingredientes_ids">
+									<tree>
+										<field name="idingrediente" />
+										<field name="nombre" />
+										<field name="descripcion" />
+									</tree>
+								</field>
+							</group>
+						</page>   -->
+						<page string="Lista de pedidos">
+							<group>
+								<field name="pedido_ids">
+									<tree>
+										<field name="name" />
+										<field name="cantidad" />
+										<field name="inicio" />
+										<field name="cpCliente" />
+									</tree>
+								</field>
+							</group>
+						</page>
+					</notebook>
+				</form>
+			</field>
+		</record>
+		<record model="ir.ui.view" id="view_upobeer_cerveza_search">
+			<field name="name">view_upobeer_cerveza_search</field>
+			<field name="model">upobeer.cerveza</field>
+			<field name="type">search</field>
+			<field name="arch" type="xml">
+				<search string="Cervezas">
+					<filter string="Tiene alcohol" domain="[('alcohol','=',True)]" />
+					<field name="name" />
+					<filter string="Unidad > 1€" domain="[('precio','>',1)]" />
+					<field name="name" />
+					<group expand="0" string="Agrupar por…">
+						<filter name="group_by_maduracion" string="Años de maduracion"
+							context="{'group_by':'maduracion'}" />
+					</group>
+				</search>
+			</field>
+		</record>
+		<record id="act_cerveza" model="ir.actions.act_window">
+			<field name="name">Cervezas</field>
+			<field name="res_model">upobeer.cerveza</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+
+		<menuitem name="Cervezas" id="cervezas_submenu"
+			parent="upobeer" sequence="100" />
+		<menuitem name="Ver cervezas" id="ver_cervezas_submenu"
+			parent="cervezas_submenu" sequence="110" action="act_cerveza" />
+	</data>
+</odoo> 
