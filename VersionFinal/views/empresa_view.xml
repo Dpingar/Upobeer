@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+		<record model="ir.ui.view" id="upobeer_empresa_form">
+			<field name="name">Empresas</field>
+			<field name="model">upobeer.empresa</field>
+			<field name="arch" type="xml">
+				<form string="Form of empresas">
+					<group string="Empresa">
+						<field name="id" />
+						<field name="name" />
+						<field name="cif" />
+					</group>
+					<group>
+						<field name="foto" nolabel="2" widget="image"
+							class="oe_avatar" />
+					</group>
+					<notebook>
+						<page string="Datos adiccionales">
+							<group>
+								<group>
+									<field name="fecha_cre" />
+									<field name="direccion" />
+									<field name="cp" />
+									<field name="tlf" />
+									<field name="email" />
+								</group>
+								<group>
+									<p>
+										La información que aquí aparece es actualizada y revisada a
+										diario
+										en caso de cualquier problema ponerse en contacto con la
+										desarrolladora
+										grupo13@tsi.com
+									</p>
+								</group>
+							</group>
+						</page>
+						<page string="Lista de pedidos">
+							<group>
+								<field name="pedido_ids">
+									<tree>
+										<field name="name" />
+										<field name="state" />
+										<field name="precioT" />
+									</tree>
+								</field>
+							</group>
+						</page>
+						<page string="Lista de operarios">
+							<group>
+								<field name="operario_ids">
+									<tree>
+										<field name="name" />
+										<field name="id" />
+										<field name="fecha_con" />
+									</tree>
+								</field>
+							</group>
+						</page>
+					</notebook>
+				</form>
+			</field>
+		</record>
+		<record model="ir.ui.view" id="upobeer_empresa_tree">
+			<field name="name">Empresas</field>
+			<field name="model">upobeer.empresa</field>
+			<field name="arch" type="xml">
+				<tree string="Tree of empresas">
+					<field name="id" />
+					<field name="name" />
+					<field name="fecha_cre" />
+					<field name="cif" />
+					<field name="direccion" />
+					<field name="cp" />
+					<field name="tlf" />
+					<field name="email" />
+					<field name="pedido_ids" />
+					<field name="operario_ids" />
+				</tree>
+			</field>
+		</record>
+		<record model="ir.ui.view" id="view_upobeer_empresa_search">
+			<field name="name">view_upobeer_empresa_search</field>
+			<field name="model">upobeer.empresa</field>
+			<field name="type">search</field>
+			<field name="arch" type="xml">
+				<search string="Empresa">
+					<group expand="0" string="Agrupar por…">
+						<filter name="group_by_cp" string="Codigo postal"
+							context="{'group_by':'cp'}" />
+						<filter name="group_by_anno" string="Año creacion"
+							context="{'group_by':'fecha_cre:year'}" />
+					</group>
+				</search>
+			</field>
+		</record>
+		<record id="act_empresa" model="ir.actions.act_window">
+			<field name="name">Empresas</field>
+			<field name="res_model">upobeer.empresa</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+		<menuitem name="Empresas" id="empresas_submenu"
+			parent="upobeer" sequence="80" />
+		<menuitem name="Ver empresas cerveceras" id="ver_empresas_submenu"
+			parent="empresas_submenu" sequence="90" action="act_empresa" />
+	</data>
+</odoo>

@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data noupdate="1">
+		<record id="cliente_1" model="upobeer.cliente">
+			<field name="name">Juan</field>
+			<field name="apellidos">Tuzri</field>
+			<field name="dni">20060971A</field>
+			<field name="fecha_nac">20/06/1998</field>
+			<field name="direccion">Mi casa, Nº22</field>
+			<field name="cp">41500</field>
+			<field name="tlf">672728588</field>
+			<field name="email">1mbisgg@gmail.com</field>
+			<field name="desde">25/11/2019</field>
+		</record>
+		<record id="cliente_2" model="upobeer.cliente">
+			<field name="name">Helena</field>
+			<field name="apellidos">Nito</field>
+			<field name="dni">20060972P</field>
+			<field name="fecha_nac">11/02/1998</field>
+			<field name="direccion">Su casa, Nº31</field>
+			<field name="cp">41500</field>
+			<field name="tlf">672727477</field>
+			<field name="email">helenanito@gmail.com</field>
+			<field name="desde">28/11/2019</field>
+		</record>
+		<record id="cliente_3" model="upobeer.cliente">
+			<field name="name">Aitor</field>
+			<field name="apellidos">Menta</field>
+			<field name="dni">20060973H</field>
+			<field name="fecha_nac">18/10/1970</field>
+			<field name="direccion">Sin casa, Nº44</field>
+			<field name="cp">41500</field>
+			<field name="tlf">672727477</field>
+			<field name="desde">30/11/2019</field>
+		</record>
+		<record id="cerveza_1" model="upobeer.cerveza">
+			<field name="name">Cruzcampo</field>
+			<field name="idcerveza">1</field>
+			<field name="alcohol">True</field>
+			<field name="envasado">15/09/2019</field>
+			<field name="maduracion">0</field>
+		</record>
+		<record id="cerveza_2" model="upobeer.cerveza">
+			<field name="name">Alhambra Reserva 1925</field>
+			<field name="idcerveza">2</field>
+			<field name="alcohol">True</field>
+			<field name="envasado">04/03/2017</field>
+			<field name="maduracion">2</field>
+		</record>
+		<record id="cerveza_3" model="upobeer.cerveza">
+			<field name="name">Estrella Galicia 0,0</field>
+			<field name="idcerveza">3</field>
+			<field name="alcohol">False</field>
+			<field name="envasado">25/10/2019</field>
+			<field name="maduracion">0</field>
+		</record>
+		<record id="empresa_1" model="upobeer.empresa">
+			<field name="name">La Barata</field>
+			<field name="id">1</field>
+			<field name="cif">265785625</field>
+			<field name="fecha_cre">14/03/2009</field>
+			<field name="direccion">Poligono El Rojillo</field>
+			<field name="cp">00044</field>
+			<field name="tlf">903475692</field>
+			<field name="email">info@labarata.es</field>
+		</record>
+		<record id="empresa_2" model="upobeer.empresa">
+			<field name="name">BeerAndFriends</field>
+			<field name="id">2</field>
+			<field name="cif">465987425</field>
+			<field name="fecha_cre">22/11/2013</field>
+			<field name="direccion">Poligono Verdon</field>
+			<field name="cp">12500</field>
+			<field name="tlf">901753659</field>
+		</record>
+		<record id="pedido_1" model="upobeer.pedido">
+			<field name="name">Pedido1</field>
+			<field name="cantidad">4</field>
+			<field name="state">sin_iniciar</field>
+			<field name="inicio">01/12/2019</field>
+			<field name="descripcion">Primer pedido</field>
+			<field name="cerveza_id" ref="cerveza_1" />
+			<field name="empresa_id" ref="empresa_2" />
+			<field name="cliente_id" ref="cliente_1" />
+		</record>
+		<record id="pedido_2" model="upobeer.pedido">
+			<field name="name">Pedido2</field>
+			<field name="cantidad">25</field>
+			<field name="state">terminado</field>
+			<field name="inicio">30/11/2019</field>
+			<field name="fin">05/12/2019</field>
+			<field name="descripcion">Segundo pedido</field>
+			<field name="cerveza_id" ref="cerveza_2" />
+			<field name="empresa_id" ref="empresa_1" />
+			<field name="cliente_id" ref="cliente_3" />
+		</record>
+		<record id="ingrediente_1" model="upobeer.ingrediente">
+			<field name="name">Pilsner</field>
+			<field name="idingrediente">1</field>
+			<field name="coste">0.22</field>
+			<field name="tipo">malta</field>
+			<field name="cerveza_ids"
+				eval="[(6, 0, [cerveza_3, cerveza_1, ])]" />
+		</record>
+		<record id="ingrediente_2" model="upobeer.ingrediente">
+			<field name="name">Agua embotellada premium</field>
+			<field name="idingrediente">2</field>
+			<field name="coste">0.21</field>
+			<field name="tipo">agua</field>
+			<field name="cerveza_ids"
+				eval="[(6, 0, [cerveza_2,])]" />
+		</record>
+		<record id="ingrediente_3" model="upobeer.ingrediente">
+			<field name="name">Chinook</field>
+			<field name="idingrediente">3</field>
+			<field name="coste">0.11</field>
+			<field name="tipo">lupulo</field>
+			<field name="cerveza_ids"
+				eval="[(6, 0, [cerveza_3,cerveza_2,])]" />
+		</record>
+		<record id="ingrediente_4" model="upobeer.ingrediente">
+			<field name="name">Pimienta de Jamaica</field>
+			<field name="idingrediente">4</field>
+			<field name="coste">0.08</field>
+			<field name="tipo">especias</field>
+			<field name="cerveza_ids"
+				eval="[(6, 0, [cerveza_2,])]" />
+		</record>
+		<record id="ingrediente_5" model="upobeer.ingrediente">
+			<field name="name">Jengibre</field>
+			<field name="idingrediente">5</field>
+			<field name="coste">0.03</field>
+			<field name="tipo">especias</field>
+			<field name="cerveza_ids"
+				eval="[(6, 0, [cerveza_2,])]" />
+		</record>
+		<record id="ingrediente_6" model="upobeer.ingrediente">
+			<field name="name">Lager</field>
+			<field name="idingrediente">6</field>
+			<field name="coste">0.07</field>
+			<field name="tipo">levadura</field>
+			<field name="cerveza_ids"
+				eval="[(6, 0, [cerveza_3,cerveza_2, ])]" />
+		</record>
+		<record id="ingrediente_7" model="upobeer.ingrediente">
+			<field name="name">Agua embotellada</field>
+			<field name="idingrediente">7</field>
+			<field name="coste">0.12</field>
+			<field name="tipo">agua</field>
+			<field name="cerveza_ids"
+				eval="[(6, 0, [cerveza_1,cerveza_3,])]" />
+		</record>
+		<record id="ingrediente_8" model="upobeer.ingrediente">
+			<field name="name">Vienna</field>
+			<field name="idingrediente">8</field>
+			<field name="coste">0.34</field>
+			<field name="tipo">malta</field>
+			<field name="cerveza_ids"
+				eval="[(6, 0, [cerveza_2,])]" />
+		</record>
+		<record id="ingrediente_9" model="upobeer.ingrediente">
+			<field name="name">Ale</field>
+			<field name="idingrediente">9</field>
+			<field name="coste">0.05</field>
+			<field name="tipo">levadura</field>
+			<field name="cerveza_ids"
+				eval="[(6, 0, [cerveza_1,])]" />
+		</record>
+		<record id="ingrediente_10" model="upobeer.ingrediente">
+			<field name="name">Citra</field>
+			<field name="idingrediente">10</field>
+			<field name="coste">0.09</field>
+			<field name="tipo">lupulo</field>
+			<field name="cerveza_ids"
+				eval="[(6, 0, [cerveza_1,])]" />
+		</record>
+	</data>
+	<record id="operario_1" model="upobeer.operario">
+			<field name="id">1</field>
+			<field name="name">Pepe</field>
+			<field name="apellidos">Perez</field>
+			<field name="dni">48635447Z</field>
+			<field name="fecha_nac">17/04/1985</field>
+			<field name="direccion">Calle TSI, Portal Nº3, Piso 1ºC</field>
+			<field name="cp">33800</field>
+			<field name="tlf">624569832</field>
+			<field name="email">pepeeloperario@gmail.com</field>
+			<field name="tlf2">604572261</field>
+			<field name="fecha_con">25/11/2019</field>
+			<field name="empresa_id" ref="empresa_1" />
+			<field name="pedido_ids"
+				eval="[(6, 0, [pedido_2,])]" />
+		</record>
+		<record id="operario_2" model="upobeer.operario">
+			<field name="id">2</field>
+			<field name="name">Luisa</field>
+			<field name="apellidos">Lopez</field>
+			<field name="dni">72103695T</field>
+			<field name="fecha_nac">31/12/1989</field>
+			<field name="direccion">Avda Los Panaderos, Nº 2</field>
+			<field name="cp">25000</field>
+			<field name="tlf">678569213</field>
+			<field name="email">luisalopez89@gmail.com</field>
+			<field name="tlf2">601325698</field>
+			<field name="fecha_con">02/03/2018</field>
+			<field name="empresa_id" ref="empresa_2" />
+			<field name="pedido_ids"
+				eval="[(6, 0, [pedido_1,])]" />
+		</record>
+		<record id="operario_3" model="upobeer.operario">
+			<field name="id">3</field>
+			<field name="name">Antonia</field>
+			<field name="apellidos">Gomez</field>
+			<field name="dni">10365825Y</field>
+			<field name="fecha_nac">25/09/1973</field>
+			<field name="direccion">Calle Los Patos, Nº9</field>
+			<field name="cp">33800</field>
+			<field name="tlf">6745215369</field>
+			<field name="email">antogomez@gmail.com</field>
+			<field name="tlf2">603457856</field>
+			<field name="fecha_con">11/11/2019</field>
+			<field name="empresa_id" ref="empresa_1" />
+			<field name="pedido_ids"
+				eval="[(6, 0, [pedido_2,])]" />
+		</record>
+		<record id="empresa_reparto_1" model="upobeer.emprep">
+			<field name="name">El Correcaminos</field>
+			<field name="id">1</field>
+			<field name="cif">4598532657</field>
+			<field name="benef">33</field>
+			<field name="fecha_cre">10/02/2012</field>
+			<field name="direccion">Poligono La Sal</field>
+			<field name="cp">70600</field>
+			<field name="tlf">901856234</field>
+			<field name="email">info@elcorrecaminos.es</field>
+		</record>
+		<record id="empresa_reparto_2" model="upobeer.emprep">
+			<field name="name">FastAndCheap</field>
+			<field name="id">2</field>
+			<field name="cif">932569854</field>
+			<field name="benef">20</field>
+			<field name="fecha_cre">22/06/2015</field>
+			<field name="direccion">Calle La Taza, Nº1</field>
+			<field name="cp">00400</field>
+			<field name="tlf">900754236</field>
+			<field name="email">info@fastandcheap.com</field>
+		</record>
+		<record id="envio_1" model="upobeer.envio">
+			<field name="name">Envio1</field>
+			<field name="state">sin_iniciar</field>
+			<field name="descripcion">Dejar al vecino sino esta</field>
+			<field name="pedido_id" ref="pedido_2" />
+			<field name="emprep_id" ref="empresa_reparto_2" />
+		</record>
+</odoo>

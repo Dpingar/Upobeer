@@ -1,0 +1,142 @@
+<odoo>
+	<data>
+		<record model="ir.ui.view" id="upobeer_operario_form">
+			<field name="name">Operarios</field>
+			<field name="model">upobeer.operario</field>
+			<field name="arch" type="xml">
+				<form string="Form of operarios">
+					<group string="Operario">
+						<field name="id" />
+						<field name="name" />
+						<field name="apellidos" />
+					</group>
+					<group>
+						<field name="foto" nolabel="1" widget="image"
+							class="oe_avatar" />
+					</group>
+					<notebook>
+						<page string="Datos personales">
+							<group>
+								<group>
+									<field name="dni" />
+									<field name="fecha_nac" />
+									<field name="tlf" />
+									<field name="direccion" />
+									<field name="cp" />
+									<field name="email" />
+								</group>
+							</group>
+						</page>
+						<page string="Datos de empresa">
+							<group>
+								<field name="empresa_id" />
+								<field name="fecha_con" />
+								<field name="tlf2" />
+							</group>
+						</page>
+						<page string="Lista de pedidos">
+							<group>
+								<field name="pedido_ids">
+									<tree>
+										<field name="name" />
+										<field name="state" />
+										<field name="inicio" />
+									</tree>
+								</field>
+							</group>
+						</page>
+					</notebook>
+				</form>
+			</field>
+		</record>
+		<record model="ir.ui.view" id="upobeer_operario_tree">
+			<field name="name">Operarios</field>
+			<field name="model">upobeer.operario</field>
+			<field name="arch" type="xml">
+				<tree string="Tree of operarios">
+					<field name="id" />
+					<field name="name" />
+					<field name="apellidos" />
+					<field name="dni" />
+					<field name="fecha_nac" />
+					<field name="tlf" />
+					<field name="tlf2" />
+					<field name="direccion" />
+					<field name="cp" />
+					<field name="email" />
+					<field name="fecha_con" />
+					<field name="empresa_id" />
+					<field name="pedido_ids" />
+				</tree>
+			</field>
+		</record>
+		<record model="ir.ui.view" id="view_upobeer_operario_search">
+			<field name="name">view_upobeer_operario_search</field>
+			<field name="model">upobeer.operario</field>
+			<field name="type">search</field>
+			<field name="arch" type="xml">
+				<search string="Operarios">
+					<group expand="0" string="Agrupar por…">
+						<filter name="group_by_cp" string="Codigo postal"
+							context="{'group_by':'cp'}" />
+					</group>
+				</search>
+			</field>
+		</record>
+		<record id="view_upobeer_operario_kanban" model="ir.ui.view">
+            <field name="name">view_upobeer_operario_kanabn</field>
+            <field name="model">upobeer.operario</field>
+            <field name="arch" type="xml">
+                <kanban class="o_upobeer_operario_kanban">
+                    <field name="id" />
+					<field name="name" />
+					<field name="apellidos" />
+					<field name="dni" />
+					<field name="fecha_nac" />
+					<field name="tlf" />
+					<field name="tlf2" />
+					<field name="direccion" />
+					<field name="cp" />
+					<field name="email" />
+					<field name="fecha_con" />
+					<field name="empresa_id" />
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_global_click">
+                                <div class="oe_kanban_details">
+                                    <strong class="o_kanban_record_title">
+                                    <field name="name"/>
+                                    </strong>
+                                <div t-if="record.apellidos.value">
+                                        <t t-esc="record.apellidos.value"/>
+                                </div>
+                                <div t-if="record.dni.value">
+                                        <t t-esc="record.dni.value"/>
+                                </div>
+                                 <div t-if="record.tlf2.value">
+                                        <t t-esc="record.tlf2.value"/>
+                                </div>
+                                 <div t-if="record.email.value">
+                                        <t t-esc="record.email.value"/>
+                                </div>
+                                <div t-if="record.empresa_id.value">
+                                        <t t-esc="record.empresa_id.value"/>
+                                </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+		<record id="act_operario" model="ir.actions.act_window">
+			<field name="name">Operarios</field>
+			<field name="res_model">upobeer.operario</field>
+			<field name="view_mode">tree,form,kanban</field>
+		</record>
+		<menuitem name="Operarios" id="operarios_submenu"
+			parent="upobeer" sequence="100" />
+		<menuitem name="Ver operarios" id="ver_operarios_submenu"
+			parent="operarios_submenu" sequence="110" action="act_operario" />
+	</data>
+</odoo>

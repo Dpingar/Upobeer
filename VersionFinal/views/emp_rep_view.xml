@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+		<record model="ir.ui.view" id="upobeer_emprep_form">
+			<field name="name">Empresas</field>
+			<field name="model">upobeer.emprep</field>
+			<field name="arch" type="xml">
+				<form string="Form of empresas">
+					<group string="Empresa Reparto">
+						<field name="id" />
+						<field name="name" />
+						<field name="cif" />
+					</group>
+					<group>
+						<field name="foto" nolabel="2" widget="image"
+							class="oe_avatar" />
+					</group>
+					<notebook>
+						<page string="Datos adiccionales">
+							<group>
+								<group>
+									<field name="fecha_cre" />
+									<field name="benef" />
+									<field name="direccion" />
+									<field name="cp" />
+									<field name="tlf" />
+									<field name="email" />
+								</group>
+								<group>
+									<p>
+										La información que aquí aparece es actualizada y revisada a
+										diario
+										en caso de cualquier problema ponerse en contacto con la
+										desarrolladora
+										grupo13@tsi.com
+									</p>
+								</group>
+							</group>
+						</page>
+						<page string="Lista de envios">
+							<group>
+								<field name="envio_ids">
+									<tree>
+										<field name="name" />
+										<field name="total" />
+										<field name="fecha_sal" />
+										<field name="fecha_ent" />
+									</tree>
+								</field>
+							</group>
+						</page>
+					</notebook>
+				</form>
+			</field>
+		</record>
+		<record model="ir.ui.view" id="upobeer_emprep_tree">
+			<field name="name">Empresas</field>
+			<field name="model">upobeer.emprep</field>
+			<field name="arch" type="xml">
+				<tree string="Tree of empresas">
+					<field name="id" />
+					<field name="name" />
+					<field name="fecha_cre" />
+					<field name="cif" />
+					<field name="benef" />
+					<field name="direccion" />
+					<field name="cp" />
+					<field name="tlf" />
+					<field name="email" />
+					<field name="envio_ids" />
+				</tree>
+			</field>
+		</record>
+		<record model="ir.ui.view" id="view_upobeer_emprep_search">
+			<field name="name">view_upobeer_emprep_search</field>
+			<field name="model">upobeer.emprep</field>
+			<field name="type">search</field>
+			<field name="arch" type="xml">
+				<search string="Empresa">
+					<group expand="0" string="Agrupar por…">
+						<filter name="group_by_cp" string="Codigo postal"
+							context="{'group_by':'cp'}" />
+						<filter name="group_by_anno" string="Año creacion"
+							context="{'group_by':'fecha_cre:year'}" />
+					</group>
+				</search>
+			</field>
+		</record>
+		<record id="act_emprep" model="ir.actions.act_window">
+			<field name="name">Empresas</field>
+			<field name="res_model">upobeer.emprep</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+		<menuitem name="Ver empresas de reparto" id="ver_empreps_submenu"
+			parent="empresas_submenu" sequence="110" action="act_emprep" />
+	</data>
+</odoo>

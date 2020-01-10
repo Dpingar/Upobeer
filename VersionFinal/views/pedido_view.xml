@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+		<record model="ir.ui.view" id="upobeer_pedido_tree_view">
+			<field name="name">view_upobeer_pedido_tree</field>
+			<field name="model">upobeer.pedido</field>
+			<field name="arch" type="xml">
+				<tree string="tree_string">
+					<field name="name" />
+					<field name="cliente_id" />
+					<field name="cantidad" />
+					<field name="state" />
+					<field name="inicio" />
+					<field name="fin" />
+					<field name="precioT" />
+					<field name="direccionCliente" />
+					<field name="cpCliente" />
+					<field name="descripcion" />
+					<field name="cant" />
+					<field name="cerveza_id" />
+					<field name="empresa_id" />
+					<field name="operario_ids" />
+				</tree>
+			</field>
+		</record>
+		<record model="ir.ui.view" id="upobeer_pedido_form">
+			<field name="name">Pedidos</field>
+			<field name="model">upobeer.pedido</field>
+			<field name="arch" type="xml">
+				<form string="Pedidos">
+				<header>
+						<button name="btn_submit_to_proceso" string="Procesar"
+							type="object" class="oe_highlight" states="sin_iniciar" />
+						<button name="btn_submit_to_terminado" string="Terminar"
+							type="object" class="oe_highlight" states="en_proceso" />
+						<field name='state' widget='statusbar' />
+				</header>
+					<group string="Pedidos">
+						<field name="name" />
+						<field name="cliente_id" />
+						<field name="empresa_id" />
+					</group>
+					<notebook>
+						<page string="Informacion">
+							<group>
+								<field name="state" />
+								<field name="inicio" />
+								<field name="fin" />
+								<field name="direccionCliente" />
+								<field name="cpCliente" />
+								<field name="descripcion" />
+							</group>
+						</page>
+						<page string="Cerveza">
+							<group>
+								<field name="cerveza_id" />
+								<field name="cantidad" />
+								<field name="precioT" />
+							</group>
+						</page>
+						<page string="Lista de operarios">
+							<group>
+								<field name="cant" />
+								<field name="operario_ids">
+									<tree>
+										<field name="name" />
+										<field name="empresa_id" />
+									</tree>
+								</field>
+							</group>
+						</page>
+					</notebook>
+				</form>
+			</field>
+		</record>
+		<record model="ir.ui.view" id="view_upobeer_pedido_calendar">
+			<field name="name">view_upobeer_pedido_calendar</field>
+			<field name="model">upobeer.pedido</field>
+			<field name="type">calendar</field>
+			<field name="arch" type="xml">
+				<calendar string="Pedidos" color="state"
+					date_start="inicio" date_stop="fin" mode="month">
+					<field name="name" />
+					<field name="precioT" />
+					<field name="descripcion" />
+				</calendar>
+			</field>
+		</record>
+		<record model="ir.ui.view" id="view_upobeer_pedido_search">
+			<field name="name">view_upobeer_pedido_search</field>
+			<field name="model">upobeer.pedido</field>
+			<field name="type">search</field>
+			<field name="arch" type="xml">
+				<search string="Pedidos">
+					<filter string="Unidades > 20"
+						domain="[('cantidad','>',20)]" />
+					<field name="cerveza_id" />
+					<group expand="0" string="Agrupar por…">
+						<filter name="group_by_cliente" string="Cliente"
+							context="{'group_by':'cliente_id'}" />
+						<filter name="group_by_estado" string="Estado"
+							context="{'group_by':'state'}" />
+						<filter name="group_by_cerveza" string="Cerveza"
+							context="{'group_by':'cerveza_id'}" />
+					</group>
+				</search>
+			</field>
+		</record>
+		<record model="ir.ui.view" id="view_upobeer_pedido_gantt">
+			<field name="name">view_upobeer_pedido_gantt</field>
+			<field name="model">upobeer.pedido</field>
+			<field name="arch" type="xml">
+				<gantt string="Pedido Gantt"
+					   date_start="inicio"
+					   date_stop="fin"
+					   default_group_by='cerveza_id'>
+				</gantt>
+			</field>
+		</record>	
+		<record id="act_pedido" model="ir.actions.act_window">
+			<field name="name">Pedidos</field>
+			<field name="res_model">upobeer.pedido</field>
+			<field name="view_mode">tree,form,calendar,gantt</field>
+		</record>
+		
+		<menuitem name="Pedidos" id="pedidos_submenu"
+			parent="upobeer" sequence="40" />
+		<menuitem name="Ver pedidos" id="ver_pedidos_submenu"
+			parent="pedidos_submenu" sequence="50" action="act_pedido" />
+	</data>
+</odoo>

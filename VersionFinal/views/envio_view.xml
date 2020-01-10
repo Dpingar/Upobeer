@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+		<record model="ir.ui.view" id="upobeer_envio_tree_view">
+			<field name="name">view_upobeer_envio_tree</field>
+			<field name="model">upobeer.envio</field>
+			<field name="arch" type="xml">
+				<tree string="tree_string">
+					<field name="name" />
+					<field name="fecha_sal" />
+					<field name="fecha_ent" />
+					<field name="state" />
+					<field name="direccion" />
+					<field name="cP" />
+					<field name="gastoEnvio" />
+					<field name="total" />
+					<field name="descripcion" />
+					<field name="pedido_id" />
+					<field name="emprep_id" />
+				</tree>
+			</field>
+		</record>
+		<record model="ir.ui.view" id="upobeer_envio_form">
+			<field name="name">Envios</field>
+			<field name="model">upobeer.envio</field>
+			<field name="arch" type="xml">
+				<form string="Envios">
+					<header>
+						<button name="btn_submit_to_reparto" string="Repartir"
+							type="object" class="oe_highlight" states="sin_iniciar" />
+						<button name="btn_submit_to_entregado" string="Entregar"
+							type="object" class="oe_highlight" states="en_reparto" />
+						<field name='state' widget='statusbar' />
+					</header>
+					<group string="Envios">
+						<field name="name" />
+						<field name="pedido_id" />
+						<field name="emprep_id" />
+						<field name="gastoEnvio" />
+						<field name="total" />
+					</group>
+					<notebook>
+						<page string="Informacion">
+							<group>
+								<field name="fecha_sal" />
+								<field name="fecha_ent" />
+								<field name="state" />
+								<field name="direccion" />
+								<field name="cP" />
+								<field name="descripcion" />
+							</group>
+						</page>
+					</notebook>
+				</form>
+			</field>
+		</record>
+		<record model="ir.ui.view" id="view_upobeer_envio_calendar">
+			<field name="name">view_upobeer_envio_calendar</field>
+			<field name="model">upobeer.envio</field>
+			<field name="type">calendar</field>
+			<field name="arch" type="xml">
+				<calendar string="Envios" color="state"
+					date_start="fecha_sal" date_stop="fecha_ent" mode="month">
+					<field name="name" />
+					<field name="emprep_id" />
+					<field name="gastoEnvio" />
+					<field name="total" />
+					<field name="descripcion" />
+				</calendar>
+			</field>
+		</record>
+		<record model="ir.ui.view" id="view_upobeer_envio_search">
+			<field name="name">view_upobeer_envio_search</field>
+			<field name="model">upobeer.envio</field>
+			<field name="type">search</field>
+			<field name="arch" type="xml">
+				<search string="Envios">
+					<filter string="Sin iniciar"
+						domain="[('state','=','sin_iniciar')]" />
+					<field name="name" />
+					<filter string="En reparto"
+						domain="[('state','=','en_reparto')]" />
+					<field name="name" />
+					<filter string="Entregado"
+						domain="[('state','=','entregado')]" />
+					<field name="name" />
+					<group expand="0" string="Agrupar por…">
+						<filter name="group_by_estado" string="Estado"
+							context="{'group_by':'state'}" />
+					</group>
+				</search>
+			</field>
+		</record>
+		<record id="act_envio" model="ir.actions.act_window">
+			<field name="name">Envios</field>
+			<field name="res_model">upobeer.envio</field>
+			<field name="view_mode">tree,form,calendar</field>
+		</record>
+		<menuitem name="Envios" id="envios_submenu" parent="upobeer"
+			sequence="60" />
+		<menuitem name="Ver envios" id="ver_envios_submenu"
+			parent="envios_submenu" sequence="70" action="act_envio" />
+	</data>
+</odoo>

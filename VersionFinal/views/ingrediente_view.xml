@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+		<record model="ir.ui.view" id="upobeer_ingrediente_tree_view">
+			<field name="name">view_upobeer_ingrediente_tree</field>
+			<field name="model">upobeer.ingrediente</field>
+			<field name="arch" type="xml">
+				<tree string="tree_string">
+					<field name="idingrediente" />
+					<field name="name" />
+					<field name="foto" />
+					<field name="coste" />
+					<field name="tipo" />
+					<field name="cerveza_ids" />
+				</tree>
+			</field>
+		</record>
+		<record model="ir.ui.view" id="view_upobeer_ingrediente_form">
+			<field name="name">view_upobeer_ingrediente_form</field>
+			<field name="model">upobeer.ingrediente</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="Ingredientes">
+					<group string="Ingredientes">
+						<field name="foto" widget="image" class="oe_avatar" />
+						<field name="idingrediente" />
+						<field name="name" />
+						<field name="coste" />
+						<field name="tipo" />
+					</group>
+					<group string="Lista de cervezas">
+						<field name="cerveza_ids">
+							<tree>
+								<field name="idcerveza" />
+								<field name="name" />
+							</tree>
+						</field>
+					</group>
+				</form>
+			</field>
+		</record>
+		<record model="ir.ui.view" id="view_upobeer_ingrediente_search">
+			<field name="name">view_upobeer_ingrediente_search</field>
+			<field name="model">upobeer.ingrediente</field>
+			<field name="type">search</field>
+			<field name="arch" type="xml">
+				<search string="Ingredientes">
+					<filter string="Es malta" domain="[('tipo','=','malta')]" />
+					<field name="name" />
+					<filter string="Es levadura"
+						domain="[('tipo','=','levadura')]" />
+					<field name="name" />
+					<group expand="0" string="Agrupar por…">
+						<filter name="group_by_tipos" string="Tipos"
+							context="{'group_by':'tipo'}" />
+					</group>
+				</search>
+			</field>
+		</record>
+		<record id="view_upobeer_ingrediente_kanban" model="ir.ui.view">
+            <field name="name">view_upobeer_ingrediente_kanabn</field>
+            <field name="model">upobeer.ingrediente</field>
+            <field name="arch" type="xml">
+                <kanban class="o_upobeer_ingrediente_kanban">
+                    <field name="idingrediente"/>
+                    <field name="name"/>
+					<field name="coste" />
+					<field name="tipo" />
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_global_click">
+                                <div class="oe_kanban_details">
+                                    <strong class="o_kanban_record_title">
+                                    <field name="name"/>
+                                    </strong>
+                                <div t-if="record.coste.value">
+                                        <t t-esc="record.coste.value"/>
+                                </div>
+                                <div t-if="record.tipo.value">
+                                        <t t-esc="record.tipo.value"/>
+                                </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+		<record id="act_ingrediente" model="ir.actions.act_window">
+			<field name="name">Ingredientes</field>
+			<field name="res_model">upobeer.ingrediente</field>
+			<field name="view_mode">tree,form,kanban</field>
+		</record>
+		<menuitem name="Ingredientes" id="ingredientes_submenu"
+			parent="upobeer" sequence="100" />
+		<menuitem name="Ver ingredientes"
+			id="ver_ingredientes_submenu" parent="ingredientes_submenu"
+			sequence="110" action="act_ingrediente" />
+	</data>
+</odoo>
