@@ -1,0 +1,13 @@
+eclipse.preferences.version=1
+encoding//models/__init__.py=utf-8
+encoding//models/cerveza.py=utf-8
+encoding//models/cliente.py=utf-8
+encoding//models/emp_rep.py=utf-8
+encoding//models/empresa.py=utf-8
+encoding//models/envio.py=utf-8
+encoding//models/ingrediente.py=utf-8
+encoding//models/models.py=utf-8
+encoding//models/operario.py=utf-8
+encoding//models/pedido.py=utf-8
+encoding/__init__.py=utf-8
+encoding/__manifest__.py=utf-8
